@@ -2,18 +2,18 @@
 
 ## Project Overview
 
-The Rewards Management API is a backend service designed to handle customer rewards and cashback transactions for Balanceè. Built using Java Spring Boot, this API provides endpoints for retrieving current cashback balances and viewing transaction histories. Additionally, it includes authentication functionality for secure access.
+The Rewards Management API is a backend service designed to handle customer rewards and cashback transactions for Balanceè. Built using Java Spring Boot, this API provides endpoints for retrieving current cashback balances, award customers cashbacks and viewing transaction histories. Additionally, it includes authentication functionality for secure access.
 
 ## Table of Contents
 
 - [Authentication](#authentication)
 - [Features](#features)
 - [Endpoints](#endpoints)
-    - [Register](#register)
-    - [Login](#login)
-    - [Get Rewards Balance](#get-rewards-balance)
-    - [Get Cashback History](#get-cashback-history)
-    - [Award Cashback](#award-Cashback)
+    - Register
+    - Login
+    - Get Rewards Balance
+    - Get Cashback History
+    - Award Cashback
 - [Models](#models)
 - [Setup Instructions](#setup-instructions)
 - [Running the Application](#running-the-application)
@@ -24,7 +24,7 @@ The Rewards Management API is a backend service designed to handle customer rewa
 Authentication is implemented using JWT (JSON Web Token). The following security setup is in place:
 
 - **Login Endpoint:** `/api/auth/login` - Authenticates the user and returns a JWT token.
-- **Registration Endpoint:** `/api/auth/register` - Registers a new user.
+- **Registration Endpoint:** `/api/auth/register` - Registers a new user, also returning a JWT token
 
 Include the JWT token in the `Authorization` header of requests to secure endpoints. Example:
 ```http
@@ -66,7 +66,7 @@ Authorization: Bearer <token>
   ```json
   {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-    "customerId": "12345",
+    "customerId": "b95fcfb6-8aa2-400a-a585-027d944fe5a7",
     "name": "Victor Adepoju",
     "email": "victoradepoju@gmail.com",
     "message": "Registration successful"
@@ -99,7 +99,7 @@ Authorization: Bearer <token>
   ```json
   {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-    "customerId": "12345",
+    "customerId": "b95fcfb6-8aa2-400a-a585-027d944fe5a7",
     "name": "Victor Adepoju",
     "email": "victoradepoju@gmail.com",
     "message": "Login successful"
@@ -193,14 +193,14 @@ Authorization: Bearer <token>
   ```
 - **Example Response:**
   ```json
-  "Cashback awarded successfully"
+  "Victor Adepoju has been awarded 20.00 cashbacks!"
   ```
 
 ## Models
 
 ### `Customer`
 
-- **ID:** Unique identifier
+- **ID:** Unique identifier (UUID)
 - **Email:** Customer's email address
 - **Name:** Customer's name
 - **Password:** Encrypted password
@@ -208,7 +208,7 @@ Authorization: Bearer <token>
 
 ### `CustomerRewards`
 
-- **RewardsId:** Unique identifier
+- **RewardsId:** Unique identifier (UUID)
 - **TotalCashback:** Total cashback earned
 - **CurrentBalance:** Available balance for cashout
 - **Customer:** Associated customer
@@ -216,7 +216,7 @@ Authorization: Bearer <token>
 
 ### `CashbackTransaction`
 
-- **TransactionId:** Unique identifier
+- **TransactionId:** Unique identifier (UUID)
 - **TransactionDate:** Date of transaction
 - **AmountEarned:** Amount of cashback earned
 - **Description:** Description of the transaction
