@@ -1,0 +1,23 @@
+services:
+  postgres:
+    container_name: reward-management
+    image: postgres
+    environment:
+      POSTGRES_USER: victor
+      POSTGRES_PASSWORD: pass
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: reward
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      - hng
+    restart: unless-stopped
+
+networks:
+  hng:
+    driver: bridge
+volumes:
+  postgres:
+    driver: local
