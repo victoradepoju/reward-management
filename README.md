@@ -11,8 +11,8 @@ The Rewards Management API is a backend service designed to handle customer rewa
 - [Endpoints](#endpoints)
     - Register
     - Login
-    - Get Rewards Balance
-    - Get Cashback History
+    - Get Rewards Balance (protected)
+    - Get Cashback History (protected)
     - Award Cashback
 - [Models](#models)
 - [Setup Instructions](#setup-instructions)
@@ -166,7 +166,7 @@ Authorization: Bearer <token>
   ]
   ```
 
-### 5. Award Cashback
+### 5. Award Cashback (note that this route is unprotected)
 
 - **Endpoint:** `/api/rewards/award-cashback/{customerId}`
 - **Request Type:** POST
